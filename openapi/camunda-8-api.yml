@@ -1,0 +1,722 @@
+openapi: 3.1.0
+info:
+  title: Camunda 8 REST API
+  description: >-
+    The Camunda 8 REST API provides endpoints for managing process instances,
+    jobs, decisions, deployments, messages, signals, and other resources in
+    the Camunda 8 process orchestration platform.
+  version: 8.6.0
+  contact:
+    name: Camunda
+    url: https://camunda.com/
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0
+servers:
+  - url: '{baseUrl}/v2'
+    description: Camunda 8 Self-Managed or SaaS
+    variables:
+      baseUrl:
+        default: http://localhost:8080
+security:
+  - BearerAuth: []
+paths:
+  /topology:
+    get:
+      operationId: getTopology
+      summary: Get cluster topology
+      description: Returns the current topology of the Camunda cluster.
+      tags:
+        - Cluster
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TopologyResponse'
+  /process-definitions/search:
+    post:
+      operationId: searchProcessDefinitions
+      summary: Search process definitions
+      description: Search for process definitions based on provided criteria.
+      tags:
+        - Process Definitions
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SearchRequest'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProcessDefinitionSearchResponse'
+  /process-definitions/{processDefinitionKey}:
+    get:
+      operationId: getProcessDefinition
+      summary: Get process definition
+      description: Returns a specific process definition by key.
+      tags:
+        - Process Definitions
+      parameters:
+        - name: processDefinitionKey
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProcessDefinition'
+  /process-definitions/{processDefinitionKey}/xml:
+    get:
+      operationId: getProcessDefinitionXml
+      summary: Get process definition XML
+      description: Returns the BPMN XML of a process definition.
+      tags:
+        - Process Definitions
+      parameters:
+        - name: processDefinitionKey
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/xml:
+              schema:
+                type: string
+  /process-instances:
+    post:
+      operationId: createProcessInstance
+      summary: Create a process instance
+      description: Creates and starts a new process instance.
+      tags:
+        - Process Instances
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateProcessInstanceRequest'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProcessInstance'
+  /process-instances/search:
+    post:
+      operationId: searchProcessInstances
+      summary: Search process instances
+      description: Search for process instances based on provided criteria.
+      tags:
+        - Process Instances
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SearchRequest'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProcessInstanceSearchResponse'
+  /process-instances/{processInstanceKey}:
+    get:
+      operationId: getProcessInstance
+      summary: Get process instance
+      description: Returns a specific process instance by key.
+      tags:
+        - Process Instances
+      parameters:
+        - name: processInstanceKey
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProcessInstance'
+    delete:
+      operationId: cancelProcessInstance
+      summary: Cancel a process instance
+      description: Cancels a running process instance.
+      tags:
+        - Process Instances
+      parameters:
+        - name: processInstanceKey
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '204':
+          description: Process instance cancelled
+  /jobs/activation:
+    post:
+      operationId: activateJobs
+      summary: Activate jobs
+      description: Activates jobs of a specific type for processing.
+      tags:
+        - Jobs
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ActivateJobsRequest'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  jobs:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Job'
+  /jobs/{jobKey}/completion:
+    post:
+      operationId: completeJob
+      summary: Complete a job
+      description: Completes a job with the given variables.
+      tags:
+        - Jobs
+      parameters:
+        - name: jobKey
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                variables:
+                  type: object
+      responses:
+        '204':
+          description: Job completed
+  /jobs/{jobKey}/failure:
+    post:
+      operationId: failJob
+      summary: Fail a job
+      description: Reports a job failure for retry or incident creation.
+      tags:
+        - Jobs
+      parameters:
+        - name: jobKey
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FailJobRequest'
+      responses:
+        '204':
+          description: Job failure reported
+  /jobs/{jobKey}/error:
+    post:
+      operationId: throwError
+      summary: Throw error for a job
+      description: Throws a BPMN error for a job.
+      tags:
+        - Jobs
+      parameters:
+        - name: jobKey
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                errorCode:
+                  type: string
+                errorMessage:
+                  type: string
+      responses:
+        '204':
+          description: Error thrown
+  /deployments:
+    post:
+      operationId: createDeployment
+      summary: Deploy resources
+      description: Deploys BPMN processes, DMN decisions, and forms.
+      tags:
+        - Deployments
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                resources:
+                  type: array
+                  items:
+                    type: string
+                    format: binary
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeploymentResponse'
+  /deployments/search:
+    post:
+      operationId: searchDeployments
+      summary: Search deployments
+      description: Search for deployments based on provided criteria.
+      tags:
+        - Deployments
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SearchRequest'
+      responses:
+        '200':
+          description: Successful response
+  /decision-definitions/search:
+    post:
+      operationId: searchDecisionDefinitions
+      summary: Search decision definitions
+      description: Search for DMN decision definitions.
+      tags:
+        - Decisions
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SearchRequest'
+      responses:
+        '200':
+          description: Successful response
+  /decision-definitions/{decisionKey}/evaluation:
+    post:
+      operationId: evaluateDecision
+      summary: Evaluate a decision
+      description: Evaluates a DMN decision with the given variables.
+      tags:
+        - Decisions
+      parameters:
+        - name: decisionKey
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                variables:
+                  type: object
+      responses:
+        '200':
+          description: Successful response
+  /user-tasks/search:
+    post:
+      operationId: searchUserTasks
+      summary: Search user tasks
+      description: Search for user tasks based on provided criteria.
+      tags:
+        - User Tasks
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SearchRequest'
+      responses:
+        '200':
+          description: Successful response
+  /user-tasks/{userTaskKey}/assignment:
+    post:
+      operationId: assignUserTask
+      summary: Assign a user task
+      description: Assigns a user task to a specific assignee.
+      tags:
+        - User Tasks
+      parameters:
+        - name: userTaskKey
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                assignee:
+                  type: string
+                allowOverride:
+                  type: boolean
+      responses:
+        '204':
+          description: Task assigned
+  /user-tasks/{userTaskKey}/completion:
+    post:
+      operationId: completeUserTask
+      summary: Complete a user task
+      description: Completes a user task with optional variables.
+      tags:
+        - User Tasks
+      parameters:
+        - name: userTaskKey
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                variables:
+                  type: object
+      responses:
+        '204':
+          description: Task completed
+  /messages/publication:
+    post:
+      operationId: publishMessage
+      summary: Publish a message
+      description: Publishes a message to correlate with waiting subscriptions.
+      tags:
+        - Messages
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PublishMessageRequest'
+      responses:
+        '200':
+          description: Successful response
+  /signals/broadcast:
+    post:
+      operationId: broadcastSignal
+      summary: Broadcast a signal
+      description: Broadcasts a signal to all matching subscriptions.
+      tags:
+        - Signals
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - signalName
+              properties:
+                signalName:
+                  type: string
+                variables:
+                  type: object
+      responses:
+        '204':
+          description: Signal broadcast
+  /incidents/search:
+    post:
+      operationId: searchIncidents
+      summary: Search incidents
+      description: Search for incidents based on provided criteria.
+      tags:
+        - Incidents
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SearchRequest'
+      responses:
+        '200':
+          description: Successful response
+  /incidents/{incidentKey}/resolution:
+    post:
+      operationId: resolveIncident
+      summary: Resolve an incident
+      description: Resolves an incident to retry the failed operation.
+      tags:
+        - Incidents
+      parameters:
+        - name: incidentKey
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '204':
+          description: Incident resolved
+components:
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+  schemas:
+    SearchRequest:
+      type: object
+      properties:
+        filter:
+          type: object
+        sort:
+          type: array
+          items:
+            type: object
+            properties:
+              field:
+                type: string
+              order:
+                type: string
+                enum: [ASC, DESC]
+        page:
+          type: object
+          properties:
+            from:
+              type: integer
+            limit:
+              type: integer
+            searchAfter:
+              type: array
+              items: {}
+            searchBefore:
+              type: array
+              items: {}
+    TopologyResponse:
+      type: object
+      properties:
+        brokers:
+          type: array
+          items:
+            type: object
+            properties:
+              nodeId:
+                type: integer
+              host:
+                type: string
+              port:
+                type: integer
+              partitions:
+                type: array
+                items:
+                  type: object
+        clusterSize:
+          type: integer
+        partitionsCount:
+          type: integer
+        replicationFactor:
+          type: integer
+        gatewayVersion:
+          type: string
+    ProcessDefinition:
+      type: object
+      properties:
+        processDefinitionKey:
+          type: integer
+          format: int64
+        bpmnProcessId:
+          type: string
+        name:
+          type: string
+        version:
+          type: integer
+        resourceName:
+          type: string
+        tenantId:
+          type: string
+    ProcessDefinitionSearchResponse:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/ProcessDefinition'
+        page:
+          type: object
+    CreateProcessInstanceRequest:
+      type: object
+      properties:
+        processDefinitionKey:
+          type: integer
+          format: int64
+        bpmnProcessId:
+          type: string
+        version:
+          type: integer
+        variables:
+          type: object
+        tenantId:
+          type: string
+    ProcessInstance:
+      type: object
+      properties:
+        processInstanceKey:
+          type: integer
+          format: int64
+        processDefinitionKey:
+          type: integer
+          format: int64
+        bpmnProcessId:
+          type: string
+        version:
+          type: integer
+        tenantId:
+          type: string
+    ProcessInstanceSearchResponse:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/ProcessInstance'
+        page:
+          type: object
+    ActivateJobsRequest:
+      type: object
+      required:
+        - type
+        - timeout
+        - maxJobsToActivate
+      properties:
+        type:
+          type: string
+        timeout:
+          type: integer
+          format: int64
+        maxJobsToActivate:
+          type: integer
+        worker:
+          type: string
+        fetchVariable:
+          type: array
+          items:
+            type: string
+        tenantIds:
+          type: array
+          items:
+            type: string
+    Job:
+      type: object
+      properties:
+        jobKey:
+          type: integer
+          format: int64
+        type:
+          type: string
+        processInstanceKey:
+          type: integer
+          format: int64
+        processDefinitionKey:
+          type: integer
+          format: int64
+        bpmnProcessId:
+          type: string
+        elementId:
+          type: string
+        elementInstanceKey:
+          type: integer
+          format: int64
+        customHeaders:
+          type: object
+        worker:
+          type: string
+        retries:
+          type: integer
+        deadline:
+          type: integer
+          format: int64
+        variables:
+          type: object
+        tenantId:
+          type: string
+    FailJobRequest:
+      type: object
+      required:
+        - retries
+      properties:
+        retries:
+          type: integer
+        errorMessage:
+          type: string
+        retryBackOff:
+          type: integer
+          format: int64
+        variables:
+          type: object
+    DeploymentResponse:
+      type: object
+      properties:
+        deploymentKey:
+          type: integer
+          format: int64
+        deployments:
+          type: array
+          items:
+            type: object
+        tenantId:
+          type: string
+    PublishMessageRequest:
+      type: object
+      required:
+        - name
+        - correlationKey
+      properties:
+        name:
+          type: string
+        correlationKey:
+          type: string
+        timeToLive:
+          type: integer
+          format: int64
+        messageId:
+          type: string
+        variables:
+          type: object
+        tenantId:
+          type: string
