@@ -3,10 +3,10 @@ url: >-
   https://raw.githubusercontent.com/api-evangelist/camunda/refs/heads/main/apis.yml
 name: Camunda
 tags:
-  - Process Automation
-  - Workflow
   - BPMN
   - Business Process Management
+  - Process Automation
+  - Workflow
 type: Index
 image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
 access: 3rd-Party
@@ -22,9 +22,9 @@ apis:
   - aid: camunda:camunda-8-api
     name: Camunda 8 API
     tags:
+      - BPMN
       - Process Automation
       - Workflow
-      - BPMN
     humanURL: https://docs.camunda.io/docs/apis-tools/camunda-api-rest/camunda-api-rest-overview/
     properties:
       - url: https://docs.camunda.io/docs/apis-tools/camunda-api-rest/camunda-api-rest-overview/
