@@ -1,0 +1,900 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Camunda 8 REST API
+  description: The Camunda 8 REST API provides endpoints for managing process instances, jobs, decisions, deployments, messages,
+    signals, and other resources in the Camunda 8 process orchestration platform.
+  tags:
+  - Camunda
+  - API
+  created: '2026-05-06'
+  modified: '2026-05-06'
+capability:
+  consumes:
+  - type: http
+    namespace: camunda
+    baseUri: http://localhost:8080/v2
+    description: Camunda 8 REST API HTTP API.
+    authentication:
+      type: bearer
+      token: '{{CAMUNDA_TOKEN}}'
+    resources:
+    - name: topology
+      path: /topology
+      operations:
+      - name: gettopology
+        method: GET
+        description: Get cluster topology
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: process-definitions-search
+      path: /process-definitions/search
+      operations:
+      - name: searchprocessdefinitions
+        method: POST
+        description: Search process definitions
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: process-definitions-processdefinitionkey
+      path: /process-definitions/{processDefinitionKey}
+      operations:
+      - name: getprocessdefinition
+        method: GET
+        description: Get process definition
+        inputParameters:
+        - name: processDefinitionKey
+          in: path
+          type: integer
+          required: true
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: process-definitions-processdefinitionkey-xml
+      path: /process-definitions/{processDefinitionKey}/xml
+      operations:
+      - name: getprocessdefinitionxml
+        method: GET
+        description: Get process definition XML
+        inputParameters:
+        - name: processDefinitionKey
+          in: path
+          type: integer
+          required: true
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: process-instances
+      path: /process-instances
+      operations:
+      - name: createprocessinstance
+        method: POST
+        description: Create a process instance
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: process-instances-search
+      path: /process-instances/search
+      operations:
+      - name: searchprocessinstances
+        method: POST
+        description: Search process instances
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: process-instances-processinstancekey
+      path: /process-instances/{processInstanceKey}
+      operations:
+      - name: getprocessinstance
+        method: GET
+        description: Get process instance
+        inputParameters:
+        - name: processInstanceKey
+          in: path
+          type: integer
+          required: true
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: cancelprocessinstance
+        method: DELETE
+        description: Cancel a process instance
+        inputParameters:
+        - name: processInstanceKey
+          in: path
+          type: integer
+          required: true
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: jobs-activation
+      path: /jobs/activation
+      operations:
+      - name: activatejobs
+        method: POST
+        description: Activate jobs
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: jobs-jobkey-completion
+      path: /jobs/{jobKey}/completion
+      operations:
+      - name: completejob
+        method: POST
+        description: Complete a job
+        inputParameters:
+        - name: jobKey
+          in: path
+          type: integer
+          required: true
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: jobs-jobkey-failure
+      path: /jobs/{jobKey}/failure
+      operations:
+      - name: failjob
+        method: POST
+        description: Fail a job
+        inputParameters:
+        - name: jobKey
+          in: path
+          type: integer
+          required: true
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: jobs-jobkey-error
+      path: /jobs/{jobKey}/error
+      operations:
+      - name: throwerror
+        method: POST
+        description: Throw error for a job
+        inputParameters:
+        - name: jobKey
+          in: path
+          type: integer
+          required: true
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: deployments
+      path: /deployments
+      operations:
+      - name: createdeployment
+        method: POST
+        description: Deploy resources
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: deployments-search
+      path: /deployments/search
+      operations:
+      - name: searchdeployments
+        method: POST
+        description: Search deployments
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: decision-definitions-search
+      path: /decision-definitions/search
+      operations:
+      - name: searchdecisiondefinitions
+        method: POST
+        description: Search decision definitions
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: decision-definitions-decisionkey-evaluation
+      path: /decision-definitions/{decisionKey}/evaluation
+      operations:
+      - name: evaluatedecision
+        method: POST
+        description: Evaluate a decision
+        inputParameters:
+        - name: decisionKey
+          in: path
+          type: integer
+          required: true
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: user-tasks-search
+      path: /user-tasks/search
+      operations:
+      - name: searchusertasks
+        method: POST
+        description: Search user tasks
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: user-tasks-usertaskkey-assignment
+      path: /user-tasks/{userTaskKey}/assignment
+      operations:
+      - name: assignusertask
+        method: POST
+        description: Assign a user task
+        inputParameters:
+        - name: userTaskKey
+          in: path
+          type: integer
+          required: true
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: user-tasks-usertaskkey-completion
+      path: /user-tasks/{userTaskKey}/completion
+      operations:
+      - name: completeusertask
+        method: POST
+        description: Complete a user task
+        inputParameters:
+        - name: userTaskKey
+          in: path
+          type: integer
+          required: true
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: messages-publication
+      path: /messages/publication
+      operations:
+      - name: publishmessage
+        method: POST
+        description: Publish a message
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: signals-broadcast
+      path: /signals/broadcast
+      operations:
+      - name: broadcastsignal
+        method: POST
+        description: Broadcast a signal
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: incidents-search
+      path: /incidents/search
+      operations:
+      - name: searchincidents
+        method: POST
+        description: Search incidents
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: incidents-incidentkey-resolution
+      path: /incidents/{incidentKey}/resolution
+      operations:
+      - name: resolveincident
+        method: POST
+        description: Resolve an incident
+        inputParameters:
+        - name: incidentKey
+          in: path
+          type: integer
+          required: true
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+  exposes:
+  - type: rest
+    port: 8080
+    namespace: camunda-rest
+    description: REST adapter for Camunda 8 REST API.
+    resources:
+    - path: /topology
+      name: gettopology
+      operations:
+      - method: GET
+        name: gettopology
+        description: Get cluster topology
+        call: camunda.gettopology
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /process-definitions/search
+      name: searchprocessdefinitions
+      operations:
+      - method: POST
+        name: searchprocessdefinitions
+        description: Search process definitions
+        call: camunda.searchprocessdefinitions
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /process-definitions/{processDefinitionKey}
+      name: getprocessdefinition
+      operations:
+      - method: GET
+        name: getprocessdefinition
+        description: Get process definition
+        call: camunda.getprocessdefinition
+        with:
+          processDefinitionKey: rest.processDefinitionKey
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /process-definitions/{processDefinitionKey}/xml
+      name: getprocessdefinitionxml
+      operations:
+      - method: GET
+        name: getprocessdefinitionxml
+        description: Get process definition XML
+        call: camunda.getprocessdefinitionxml
+        with:
+          processDefinitionKey: rest.processDefinitionKey
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /process-instances
+      name: createprocessinstance
+      operations:
+      - method: POST
+        name: createprocessinstance
+        description: Create a process instance
+        call: camunda.createprocessinstance
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /process-instances/search
+      name: searchprocessinstances
+      operations:
+      - method: POST
+        name: searchprocessinstances
+        description: Search process instances
+        call: camunda.searchprocessinstances
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /process-instances/{processInstanceKey}
+      name: getprocessinstance
+      operations:
+      - method: GET
+        name: getprocessinstance
+        description: Get process instance
+        call: camunda.getprocessinstance
+        with:
+          processInstanceKey: rest.processInstanceKey
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /process-instances/{processInstanceKey}
+      name: cancelprocessinstance
+      operations:
+      - method: DELETE
+        name: cancelprocessinstance
+        description: Cancel a process instance
+        call: camunda.cancelprocessinstance
+        with:
+          processInstanceKey: rest.processInstanceKey
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /jobs/activation
+      name: activatejobs
+      operations:
+      - method: POST
+        name: activatejobs
+        description: Activate jobs
+        call: camunda.activatejobs
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /jobs/{jobKey}/completion
+      name: completejob
+      operations:
+      - method: POST
+        name: completejob
+        description: Complete a job
+        call: camunda.completejob
+        with:
+          jobKey: rest.jobKey
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /jobs/{jobKey}/failure
+      name: failjob
+      operations:
+      - method: POST
+        name: failjob
+        description: Fail a job
+        call: camunda.failjob
+        with:
+          jobKey: rest.jobKey
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /jobs/{jobKey}/error
+      name: throwerror
+      operations:
+      - method: POST
+        name: throwerror
+        description: Throw error for a job
+        call: camunda.throwerror
+        with:
+          jobKey: rest.jobKey
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /deployments
+      name: createdeployment
+      operations:
+      - method: POST
+        name: createdeployment
+        description: Deploy resources
+        call: camunda.createdeployment
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /deployments/search
+      name: searchdeployments
+      operations:
+      - method: POST
+        name: searchdeployments
+        description: Search deployments
+        call: camunda.searchdeployments
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /decision-definitions/search
+      name: searchdecisiondefinitions
+      operations:
+      - method: POST
+        name: searchdecisiondefinitions
+        description: Search decision definitions
+        call: camunda.searchdecisiondefinitions
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /decision-definitions/{decisionKey}/evaluation
+      name: evaluatedecision
+      operations:
+      - method: POST
+        name: evaluatedecision
+        description: Evaluate a decision
+        call: camunda.evaluatedecision
+        with:
+          decisionKey: rest.decisionKey
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /user-tasks/search
+      name: searchusertasks
+      operations:
+      - method: POST
+        name: searchusertasks
+        description: Search user tasks
+        call: camunda.searchusertasks
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /user-tasks/{userTaskKey}/assignment
+      name: assignusertask
+      operations:
+      - method: POST
+        name: assignusertask
+        description: Assign a user task
+        call: camunda.assignusertask
+        with:
+          userTaskKey: rest.userTaskKey
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /user-tasks/{userTaskKey}/completion
+      name: completeusertask
+      operations:
+      - method: POST
+        name: completeusertask
+        description: Complete a user task
+        call: camunda.completeusertask
+        with:
+          userTaskKey: rest.userTaskKey
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /messages/publication
+      name: publishmessage
+      operations:
+      - method: POST
+        name: publishmessage
+        description: Publish a message
+        call: camunda.publishmessage
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /signals/broadcast
+      name: broadcastsignal
+      operations:
+      - method: POST
+        name: broadcastsignal
+        description: Broadcast a signal
+        call: camunda.broadcastsignal
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /incidents/search
+      name: searchincidents
+      operations:
+      - method: POST
+        name: searchincidents
+        description: Search incidents
+        call: camunda.searchincidents
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /incidents/{incidentKey}/resolution
+      name: resolveincident
+      operations:
+      - method: POST
+        name: resolveincident
+        description: Resolve an incident
+        call: camunda.resolveincident
+        with:
+          incidentKey: rest.incidentKey
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    port: 9090
+    namespace: camunda-mcp
+    transport: http
+    description: MCP adapter for Camunda 8 REST API for AI agent use.
+    tools:
+    - name: gettopology
+      description: Get cluster topology
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: camunda.gettopology
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: searchprocessdefinitions
+      description: Search process definitions
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: camunda.searchprocessdefinitions
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: getprocessdefinition
+      description: Get process definition
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: camunda.getprocessdefinition
+      with:
+        processDefinitionKey: tools.processDefinitionKey
+      inputParameters:
+      - name: processDefinitionKey
+        type: integer
+        description: processDefinitionKey
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: getprocessdefinitionxml
+      description: Get process definition XML
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: camunda.getprocessdefinitionxml
+      with:
+        processDefinitionKey: tools.processDefinitionKey
+      inputParameters:
+      - name: processDefinitionKey
+        type: integer
+        description: processDefinitionKey
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: createprocessinstance
+      description: Create a process instance
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: camunda.createprocessinstance
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: searchprocessinstances
+      description: Search process instances
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: camunda.searchprocessinstances
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: getprocessinstance
+      description: Get process instance
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: camunda.getprocessinstance
+      with:
+        processInstanceKey: tools.processInstanceKey
+      inputParameters:
+      - name: processInstanceKey
+        type: integer
+        description: processInstanceKey
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: cancelprocessinstance
+      description: Cancel a process instance
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: camunda.cancelprocessinstance
+      with:
+        processInstanceKey: tools.processInstanceKey
+      inputParameters:
+      - name: processInstanceKey
+        type: integer
+        description: processInstanceKey
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: activatejobs
+      description: Activate jobs
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: camunda.activatejobs
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: completejob
+      description: Complete a job
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: camunda.completejob
+      with:
+        jobKey: tools.jobKey
+      inputParameters:
+      - name: jobKey
+        type: integer
+        description: jobKey
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: failjob
+      description: Fail a job
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: camunda.failjob
+      with:
+        jobKey: tools.jobKey
+      inputParameters:
+      - name: jobKey
+        type: integer
+        description: jobKey
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: throwerror
+      description: Throw error for a job
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: camunda.throwerror
+      with:
+        jobKey: tools.jobKey
+      inputParameters:
+      - name: jobKey
+        type: integer
+        description: jobKey
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: createdeployment
+      description: Deploy resources
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: camunda.createdeployment
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: searchdeployments
+      description: Search deployments
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: camunda.searchdeployments
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: searchdecisiondefinitions
+      description: Search decision definitions
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: camunda.searchdecisiondefinitions
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: evaluatedecision
+      description: Evaluate a decision
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: camunda.evaluatedecision
+      with:
+        decisionKey: tools.decisionKey
+      inputParameters:
+      - name: decisionKey
+        type: integer
+        description: decisionKey
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: searchusertasks
+      description: Search user tasks
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: camunda.searchusertasks
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: assignusertask
+      description: Assign a user task
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: camunda.assignusertask
+      with:
+        userTaskKey: tools.userTaskKey
+      inputParameters:
+      - name: userTaskKey
+        type: integer
+        description: userTaskKey
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: completeusertask
+      description: Complete a user task
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: camunda.completeusertask
+      with:
+        userTaskKey: tools.userTaskKey
+      inputParameters:
+      - name: userTaskKey
+        type: integer
+        description: userTaskKey
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: publishmessage
+      description: Publish a message
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: camunda.publishmessage
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: broadcastsignal
+      description: Broadcast a signal
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: camunda.broadcastsignal
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: searchincidents
+      description: Search incidents
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: camunda.searchincidents
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: resolveincident
+      description: Resolve an incident
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: camunda.resolveincident
+      with:
+        incidentKey: tools.incidentKey
+      inputParameters:
+      - name: incidentKey
+        type: integer
+        description: incidentKey
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+binds:
+- namespace: env
+  keys:
+    CAMUNDA_TOKEN: CAMUNDA_TOKEN
