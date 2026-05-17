@@ -41,15 +41,15 @@ common:
     url: https://docs.camunda.io/
   - type: Documentation
     url: https://docs.camunda.io/docs/apis-tools/
-  - type: Getting Started
+  - type: GettingStarted
     url: https://docs.camunda.io/docs/guides/
   - type: Blog
     url: https://camunda.com/blog/
   - type: Community
     url: https://forum.camunda.io/
-  - type: Privacy Policy
+  - type: PrivacyPolicy
     url: https://camunda.com/legal/privacy/
-  - type: Terms of Service
+  - type: TermsOfService
     url: https://camunda.com/legal/terms/
   - type: Integrations
     url: https://camunda.com/partners/
