@@ -2,10 +2,10 @@ aid: camunda
 url: https://raw.githubusercontent.com/api-evangelist/camunda/refs/heads/main/apis.yml
 name: Camunda
 tags:
-- BPMN
-- Business Process Management
-- Process Automation
-- Workflow
+  - BPMN
+  - Business Process Management
+  - Process Automation
+  - Workflow
 type: Index
 image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
 access: 3rd-Party
@@ -16,87 +16,89 @@ description: Camunda is a process orchestration platform that enables organizati
   processes using BPMN (Business Process Model and Notation). Camunda provides a complete solution for workflow automation,
   decision automation, and process monitoring.
 apis:
-- aid: camunda:camunda-8-api
-  name: Camunda 8 API
-  tags:
-  - BPMN
-  - Process Automation
-  - Workflow
-  humanURL: https://docs.camunda.io/docs/apis-tools/camunda-api-rest/camunda-api-rest-overview/
-  properties:
-  - url: https://docs.camunda.io/docs/apis-tools/camunda-api-rest/camunda-api-rest-overview/
-    type: Documentation
-  - url: https://raw.githubusercontent.com/api-evangelist/camunda/refs/heads/main/openapi/camunda-8-api.yml
-    type: OpenAPI
-  - type: NaftikoCapability
-    url: capabilities/8-cluster.yaml
-  - type: NaftikoCapability
-    url: capabilities/8-decisions.yaml
-  - type: NaftikoCapability
-    url: capabilities/8-deployments.yaml
-  - type: NaftikoCapability
-    url: capabilities/8-incidents.yaml
-  - type: NaftikoCapability
-    url: capabilities/8-jobs.yaml
-  - type: NaftikoCapability
-    url: capabilities/8-messages.yaml
-  - type: NaftikoCapability
-    url: capabilities/8-process-definitions.yaml
-  - type: NaftikoCapability
-    url: capabilities/8-process-instances.yaml
-  - type: NaftikoCapability
-    url: capabilities/8-signals.yaml
-  - type: NaftikoCapability
-    url: capabilities/8-user-tasks.yaml
-  description: The Camunda 8 REST API provides access to process instances, tasks, decisions, and other Camunda resources
-    for process automation workflows.
+  - aid: camunda:camunda-8-api
+    name: Camunda 8 API
+    tags:
+    - BPMN
+    - Process Automation
+    - Workflow
+    humanURL: https://docs.camunda.io/docs/apis-tools/camunda-api-rest/camunda-api-rest-overview/
+    properties:
+    - url: https://docs.camunda.io/docs/apis-tools/camunda-api-rest/camunda-api-rest-overview/
+      type: Documentation
+    - url: https://raw.githubusercontent.com/api-evangelist/camunda/refs/heads/main/openapi/camunda-8-api.yml
+      type: OpenAPI
+    - type: NaftikoCapability
+      url: capabilities/8-cluster.yaml
+    - type: NaftikoCapability
+      url: capabilities/8-decisions.yaml
+    - type: NaftikoCapability
+      url: capabilities/8-deployments.yaml
+    - type: NaftikoCapability
+      url: capabilities/8-incidents.yaml
+    - type: NaftikoCapability
+      url: capabilities/8-jobs.yaml
+    - type: NaftikoCapability
+      url: capabilities/8-messages.yaml
+    - type: NaftikoCapability
+      url: capabilities/8-process-definitions.yaml
+    - type: NaftikoCapability
+      url: capabilities/8-process-instances.yaml
+    - type: NaftikoCapability
+      url: capabilities/8-signals.yaml
+    - type: NaftikoCapability
+      url: capabilities/8-user-tasks.yaml
+    description: The Camunda 8 REST API provides access to process instances, tasks, decisions, and other Camunda resources
+      for process automation workflows.
 common:
-- type: LinkedIn
-  url: https://www.linkedin.com/company/camunda
-- type: Website
-  url: https://camunda.com/
-- type: Portal
-  url: https://docs.camunda.io/
-- type: Documentation
-  url: https://docs.camunda.io/docs/apis-tools/
-- type: GettingStarted
-  url: https://docs.camunda.io/docs/guides/
-- type: Blog
-  url: https://camunda.com/blog/
-- type: Community
-  url: https://forum.camunda.io/
-- type: PrivacyPolicy
-  url: https://camunda.com/legal/privacy/
-- type: TermsOfService
-  url: https://camunda.com/legal/terms/
-- type: Integrations
-  url: https://camunda.com/partners/
+  - type: GitHubOrganization
+    url: https://github.com/camunda
+  - type: LinkedIn
+    url: https://www.linkedin.com/company/camunda
+  - type: Website
+    url: https://camunda.com/
+  - type: Portal
+    url: https://docs.camunda.io/
+  - type: Documentation
+    url: https://docs.camunda.io/docs/apis-tools/
+  - type: GettingStarted
+    url: https://docs.camunda.io/docs/guides/
+  - type: Blog
+    url: https://camunda.com/blog/
+  - type: Community
+    url: https://forum.camunda.io/
+  - type: PrivacyPolicy
+    url: https://camunda.com/legal/privacy/
+  - type: TermsOfService
+    url: https://camunda.com/legal/terms/
+  - type: Integrations
+    url: https://camunda.com/partners/
 integrations:
-- name: Aaseya
-- name: apendo
-- name: BP3
-- name: Capital BPM
-- name: Envite Consulting
-- name: Holisticon AG
-- name: ilume
-- name: JIT
-- name: NTConsult
-- name: WDW eLab GmbH
-- name: Capgemini America, Inc.
-- name: cimt ag
-- name: Cognizant Technology Solutions
-- name: GFT Italia S.r.l.
-- name: HCLTech
-- name: Horus Sp. z.o.o.
-- name: Incentro
-- name: INDUSTRIA
-- name: Infosys
-- name: Integrity Vision LLC
-- name: it-economics GmbH
-- name: Materna Information & Communications SE
-- name: NTT Data
-- name: Osian Infotech Pvt. Ltd.
+  - name: Aaseya
+  - name: apendo
+  - name: BP3
+  - name: Capital BPM
+  - name: Envite Consulting
+  - name: Holisticon AG
+  - name: ilume
+  - name: JIT
+  - name: NTConsult
+  - name: WDW eLab GmbH
+  - name: Capgemini America, Inc.
+  - name: cimt ag
+  - name: Cognizant Technology Solutions
+  - name: GFT Italia S.r.l.
+  - name: HCLTech
+  - name: Horus Sp. z.o.o.
+  - name: Incentro
+  - name: INDUSTRIA
+  - name: Infosys
+  - name: Integrity Vision LLC
+  - name: it-economics GmbH
+  - name: Materna Information & Communications SE
+  - name: NTT Data
+  - name: Osian Infotech Pvt. Ltd.
 maintainers:
-- FN: Kin Lane
-  email: kin@apievangelist.com
+  - FN: Kin Lane
+    email: kin@apievangelist.com
 specificationVersion: '0.19'
