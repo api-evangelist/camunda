@@ -1,0 +1,224 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Camunda 8 REST API — Jobs
+  description: 'Camunda 8 REST API — Jobs. 4 operations. Lead operation: Activate jobs. Self-contained Naftiko capability
+    covering one Camunda business surface.'
+  tags:
+  - Camunda
+  - Jobs
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    CAMUNDA_API_KEY: CAMUNDA_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: 8-jobs
+    baseUri: ''
+    description: Camunda 8 REST API — Jobs business capability. Self-contained, no shared references.
+    resources:
+    - name: jobs-activation
+      path: /jobs/activation
+      operations:
+      - name: activatejobs
+        method: POST
+        description: Activate jobs
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: jobs-jobKey-completion
+      path: /jobs/{jobKey}/completion
+      operations:
+      - name: completejob
+        method: POST
+        description: Complete a job
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: jobKey
+          in: path
+          type: integer
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+    - name: jobs-jobKey-error
+      path: /jobs/{jobKey}/error
+      operations:
+      - name: throwerror
+        method: POST
+        description: Throw error for a job
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: jobKey
+          in: path
+          type: integer
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: jobs-jobKey-failure
+      path: /jobs/{jobKey}/failure
+      operations:
+      - name: failjob
+        method: POST
+        description: Fail a job
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: jobKey
+          in: path
+          type: integer
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.CAMUNDA_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: 8-jobs-rest
+    port: 8080
+    description: REST adapter for Camunda 8 REST API — Jobs. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/jobs/activation
+      name: jobs-activation
+      description: REST surface for jobs-activation.
+      operations:
+      - method: POST
+        name: activatejobs
+        description: Activate jobs
+        call: 8-jobs.activatejobs
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/jobs/{jobkey}/completion
+      name: jobs-jobkey-completion
+      description: REST surface for jobs-jobKey-completion.
+      operations:
+      - method: POST
+        name: completejob
+        description: Complete a job
+        call: 8-jobs.completejob
+        with:
+          jobKey: rest.jobKey
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/jobs/{jobkey}/error
+      name: jobs-jobkey-error
+      description: REST surface for jobs-jobKey-error.
+      operations:
+      - method: POST
+        name: throwerror
+        description: Throw error for a job
+        call: 8-jobs.throwerror
+        with:
+          jobKey: rest.jobKey
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/jobs/{jobkey}/failure
+      name: jobs-jobkey-failure
+      description: REST surface for jobs-jobKey-failure.
+      operations:
+      - method: POST
+        name: failjob
+        description: Fail a job
+        call: 8-jobs.failjob
+        with:
+          jobKey: rest.jobKey
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: 8-jobs-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Camunda 8 REST API — Jobs. One tool per consumed operation, routed inline through this capability's
+      consumes block.
+    tools:
+    - name: activate-jobs
+      description: Activate jobs
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: 8-jobs.activatejobs
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: complete-job
+      description: Complete a job
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: 8-jobs.completejob
+      with:
+        jobKey: tools.jobKey
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: throw-error-job
+      description: Throw error for a job
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: 8-jobs.throwerror
+      with:
+        jobKey: tools.jobKey
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: fail-job
+      description: Fail a job
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: 8-jobs.failjob
+      with:
+        jobKey: tools.jobKey
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

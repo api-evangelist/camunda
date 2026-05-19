@@ -1,0 +1,122 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Camunda 8 REST API — Deployments
+  description: 'Camunda 8 REST API — Deployments. 2 operations. Lead operation: Deploy resources. Self-contained Naftiko capability
+    covering one Camunda business surface.'
+  tags:
+  - Camunda
+  - Deployments
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    CAMUNDA_API_KEY: CAMUNDA_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: 8-deployments
+    baseUri: ''
+    description: Camunda 8 REST API — Deployments business capability. Self-contained, no shared references.
+    resources:
+    - name: deployments
+      path: /deployments
+      operations:
+      - name: createdeployment
+        method: POST
+        description: Deploy resources
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: deployments-search
+      path: /deployments/search
+      operations:
+      - name: searchdeployments
+        method: POST
+        description: Search deployments
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+    authentication:
+      type: bearer
+      token: '{{env.CAMUNDA_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: 8-deployments-rest
+    port: 8080
+    description: REST adapter for Camunda 8 REST API — Deployments. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/deployments
+      name: deployments
+      description: REST surface for deployments.
+      operations:
+      - method: POST
+        name: createdeployment
+        description: Deploy resources
+        call: 8-deployments.createdeployment
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/deployments/search
+      name: deployments-search
+      description: REST surface for deployments-search.
+      operations:
+      - method: POST
+        name: searchdeployments
+        description: Search deployments
+        call: 8-deployments.searchdeployments
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: 8-deployments-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Camunda 8 REST API — Deployments. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: deploy-resources
+      description: Deploy resources
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: 8-deployments.createdeployment
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: search-deployments
+      description: Search deployments
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: false
+      call: 8-deployments.searchdeployments
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

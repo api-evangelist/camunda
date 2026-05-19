@@ -1,0 +1,176 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Camunda 8 REST API — User Tasks
+  description: 'Camunda 8 REST API — User Tasks. 3 operations. Lead operation: Search user tasks. Self-contained Naftiko capability
+    covering one Camunda business surface.'
+  tags:
+  - Camunda
+  - User Tasks
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    CAMUNDA_API_KEY: CAMUNDA_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: 8-user-tasks
+    baseUri: ''
+    description: Camunda 8 REST API — User Tasks business capability. Self-contained, no shared references.
+    resources:
+    - name: user-tasks-search
+      path: /user-tasks/search
+      operations:
+      - name: searchusertasks
+        method: POST
+        description: Search user tasks
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+    - name: user-tasks-userTaskKey-assignment
+      path: /user-tasks/{userTaskKey}/assignment
+      operations:
+      - name: assignusertask
+        method: POST
+        description: Assign a user task
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: userTaskKey
+          in: path
+          type: integer
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: user-tasks-userTaskKey-completion
+      path: /user-tasks/{userTaskKey}/completion
+      operations:
+      - name: completeusertask
+        method: POST
+        description: Complete a user task
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: userTaskKey
+          in: path
+          type: integer
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+    authentication:
+      type: bearer
+      token: '{{env.CAMUNDA_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: 8-user-tasks-rest
+    port: 8080
+    description: REST adapter for Camunda 8 REST API — User Tasks. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/user-tasks/search
+      name: user-tasks-search
+      description: REST surface for user-tasks-search.
+      operations:
+      - method: POST
+        name: searchusertasks
+        description: Search user tasks
+        call: 8-user-tasks.searchusertasks
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/user-tasks/{usertaskkey}/assignment
+      name: user-tasks-usertaskkey-assignment
+      description: REST surface for user-tasks-userTaskKey-assignment.
+      operations:
+      - method: POST
+        name: assignusertask
+        description: Assign a user task
+        call: 8-user-tasks.assignusertask
+        with:
+          userTaskKey: rest.userTaskKey
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/user-tasks/{usertaskkey}/completion
+      name: user-tasks-usertaskkey-completion
+      description: REST surface for user-tasks-userTaskKey-completion.
+      operations:
+      - method: POST
+        name: completeusertask
+        description: Complete a user task
+        call: 8-user-tasks.completeusertask
+        with:
+          userTaskKey: rest.userTaskKey
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: 8-user-tasks-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Camunda 8 REST API — User Tasks. One tool per consumed operation, routed inline through this
+      capability's consumes block.
+    tools:
+    - name: search-user-tasks
+      description: Search user tasks
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: false
+      call: 8-user-tasks.searchusertasks
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: assign-user-task
+      description: Assign a user task
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: 8-user-tasks.assignusertask
+      with:
+        userTaskKey: tools.userTaskKey
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: complete-user-task
+      description: Complete a user task
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: 8-user-tasks.completeusertask
+      with:
+        userTaskKey: tools.userTaskKey
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
