@@ -73,6 +73,8 @@ common:
     url: https://camunda.com/legal/terms/
   - type: Integrations
     url: https://camunda.com/partners/
+  - type: LLMsTxt
+    url: https://docs.camunda.io/llms.txt
 integrations:
   - name: Aaseya
   - name: apendo
