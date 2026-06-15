@@ -1,0 +1,500 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Camunda 8 REST API",
+    "version": "8.6.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Cluster",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get cluster topology",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{baseUrl}/v2/topology"
+          },
+          "docs": "Returns the current topology of the Camunda cluster."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Process Definitions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Search process definitions",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{baseUrl}/v2/process-definitions/search",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Search for process definitions based on provided criteria."
+        },
+        {
+          "info": {
+            "name": "Get process definition",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{baseUrl}/v2/process-definitions/:processDefinitionKey",
+            "params": [
+              {
+                "name": "processDefinitionKey",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns a specific process definition by key."
+        },
+        {
+          "info": {
+            "name": "Get process definition XML",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{baseUrl}/v2/process-definitions/:processDefinitionKey/xml",
+            "params": [
+              {
+                "name": "processDefinitionKey",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns the BPMN XML of a process definition."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Process Instances",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create a process instance",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{baseUrl}/v2/process-instances",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates and starts a new process instance."
+        },
+        {
+          "info": {
+            "name": "Search process instances",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{baseUrl}/v2/process-instances/search",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Search for process instances based on provided criteria."
+        },
+        {
+          "info": {
+            "name": "Get process instance",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{baseUrl}/v2/process-instances/:processInstanceKey",
+            "params": [
+              {
+                "name": "processInstanceKey",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns a specific process instance by key."
+        },
+        {
+          "info": {
+            "name": "Cancel a process instance",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{baseUrl}/v2/process-instances/:processInstanceKey",
+            "params": [
+              {
+                "name": "processInstanceKey",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Cancels a running process instance."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Jobs",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Activate jobs",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{baseUrl}/v2/jobs/activation",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Activates jobs of a specific type for processing."
+        },
+        {
+          "info": {
+            "name": "Complete a job",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{baseUrl}/v2/jobs/:jobKey/completion",
+            "params": [
+              {
+                "name": "jobKey",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Completes a job with the given variables."
+        },
+        {
+          "info": {
+            "name": "Fail a job",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{baseUrl}/v2/jobs/:jobKey/failure",
+            "params": [
+              {
+                "name": "jobKey",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Reports a job failure for retry or incident creation."
+        },
+        {
+          "info": {
+            "name": "Throw error for a job",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{baseUrl}/v2/jobs/:jobKey/error",
+            "params": [
+              {
+                "name": "jobKey",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Throws a BPMN error for a job."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Deployments",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Deploy resources",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{baseUrl}/v2/deployments",
+            "body": {
+              "type": "multipart-form",
+              "data": [
+                {
+                  "name": "resources",
+                  "type": "text",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Deploys BPMN processes, DMN decisions, and forms."
+        },
+        {
+          "info": {
+            "name": "Search deployments",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{baseUrl}/v2/deployments/search",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Search for deployments based on provided criteria."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Decisions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Search decision definitions",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{baseUrl}/v2/decision-definitions/search",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Search for DMN decision definitions."
+        },
+        {
+          "info": {
+            "name": "Evaluate a decision",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{baseUrl}/v2/decision-definitions/:decisionKey/evaluation",
+            "params": [
+              {
+                "name": "decisionKey",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Evaluates a DMN decision with the given variables."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "User Tasks",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Search user tasks",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{baseUrl}/v2/user-tasks/search",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Search for user tasks based on provided criteria."
+        },
+        {
+          "info": {
+            "name": "Assign a user task",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{baseUrl}/v2/user-tasks/:userTaskKey/assignment",
+            "params": [
+              {
+                "name": "userTaskKey",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Assigns a user task to a specific assignee."
+        },
+        {
+          "info": {
+            "name": "Complete a user task",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{baseUrl}/v2/user-tasks/:userTaskKey/completion",
+            "params": [
+              {
+                "name": "userTaskKey",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Completes a user task with optional variables."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Messages",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Publish a message",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{baseUrl}/v2/messages/publication",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Publishes a message to correlate with waiting subscriptions."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Signals",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Broadcast a signal",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{baseUrl}/v2/signals/broadcast",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Broadcasts a signal to all matching subscriptions."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Incidents",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Search incidents",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{baseUrl}/v2/incidents/search",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Search for incidents based on provided criteria."
+        },
+        {
+          "info": {
+            "name": "Resolve an incident",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{baseUrl}/v2/incidents/:incidentKey/resolution",
+            "params": [
+              {
+                "name": "incidentKey",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Resolves an incident to retry the failed operation."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
