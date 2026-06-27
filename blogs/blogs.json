@@ -2,11 +2,11 @@
   "repo": "camunda",
   "feeds": [
     {
-      "source": "https://camunda.com/blog/",
-      "feed_url": "https://camunda.com/blog/",
+      "source": "https://camunda.com/blog/feed/",
+      "feed_url": "https://camunda.com/blog/feed/",
       "title": "",
-      "saved": 0,
-      "method": "none"
+      "saved": 5,
+      "method": "feed"
     },
     {
       "source": "https://docs.camunda.io/docs/guides/",
@@ -16,6 +16,6 @@
       "method": "none"
     }
   ],
-  "post_count": 21,
-  "fetched": "2026-06-14T20:42:17Z"
+  "post_count": 28,
+  "fetched": "2026-06-27T12:03:07Z"
 }
