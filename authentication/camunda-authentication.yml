@@ -1,0 +1,12 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/camunda-8-api.yml
+summary:
+  types:
+  - http
+schemes:
+- name: BearerAuth
+  type: http
+  scheme: bearer
+  sources:
+  - openapi/camunda-8-api.yml

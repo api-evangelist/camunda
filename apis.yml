@@ -33,6 +33,14 @@ apis:
       The Camunda 8 REST API provides access to process instances, tasks, decisions, and other Camunda resources for
       process automation workflows.
 common:
+  - type: TrustCenter
+    url: security/camunda-trust-center.yml
+  - type: VulnerabilityDisclosure
+    url: security/camunda-vulnerability-disclosure.yml
+  - type: DomainSecurity
+    url: security/camunda-domain-security.yml
+  - type: Authentication
+    url: authentication/camunda-authentication.yml
   - type: GitHubOrganization
     url: https://github.com/camunda
   - type: LinkedIn
