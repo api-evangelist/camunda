@@ -33,6 +33,8 @@ apis:
       The Camunda 8 REST API provides access to process instances, tasks, decisions, and other Camunda resources for
       process automation workflows.
 common:
+  - type: AgenticAccess
+    url: agentic-access/camunda-agentic-access.yml
   - type: TrustCenter
     url: security/camunda-trust-center.yml
   - type: VulnerabilityDisclosure
