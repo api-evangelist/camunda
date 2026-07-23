@@ -1,0 +1,201 @@
+openapi: 3.1.0
+info:
+  title: Camunda 8 REST Cluster Jobs API
+  description: The Camunda 8 REST API provides endpoints for managing process instances, jobs, decisions, deployments, messages, signals, and other resources in the Camunda 8 process orchestration platform.
+  version: 8.6.0
+  contact:
+    name: Camunda
+    url: https://camunda.com/
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0
+servers:
+- url: '{baseUrl}/v2'
+  description: Camunda 8 Self-Managed or SaaS
+  variables:
+    baseUrl:
+      default: http://localhost:8080
+security:
+- BearerAuth: []
+tags:
+- name: Jobs
+paths:
+  /jobs/activation:
+    post:
+      operationId: activateJobs
+      summary: Activate jobs
+      description: Activates jobs of a specific type for processing.
+      tags:
+      - Jobs
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ActivateJobsRequest'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  jobs:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Job'
+  /jobs/{jobKey}/completion:
+    post:
+      operationId: completeJob
+      summary: Complete a job
+      description: Completes a job with the given variables.
+      tags:
+      - Jobs
+      parameters:
+      - name: jobKey
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                variables:
+                  type: object
+      responses:
+        '204':
+          description: Job completed
+  /jobs/{jobKey}/failure:
+    post:
+      operationId: failJob
+      summary: Fail a job
+      description: Reports a job failure for retry or incident creation.
+      tags:
+      - Jobs
+      parameters:
+      - name: jobKey
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FailJobRequest'
+      responses:
+        '204':
+          description: Job failure reported
+  /jobs/{jobKey}/error:
+    post:
+      operationId: throwError
+      summary: Throw error for a job
+      description: Throws a BPMN error for a job.
+      tags:
+      - Jobs
+      parameters:
+      - name: jobKey
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                errorCode:
+                  type: string
+                errorMessage:
+                  type: string
+      responses:
+        '204':
+          description: Error thrown
+components:
+  schemas:
+    Job:
+      type: object
+      properties:
+        jobKey:
+          type: integer
+          format: int64
+        type:
+          type: string
+        processInstanceKey:
+          type: integer
+          format: int64
+        processDefinitionKey:
+          type: integer
+          format: int64
+        bpmnProcessId:
+          type: string
+        elementId:
+          type: string
+        elementInstanceKey:
+          type: integer
+          format: int64
+        customHeaders:
+          type: object
+        worker:
+          type: string
+        retries:
+          type: integer
+        deadline:
+          type: integer
+          format: int64
+        variables:
+          type: object
+        tenantId:
+          type: string
+    ActivateJobsRequest:
+      type: object
+      required:
+      - type
+      - timeout
+      - maxJobsToActivate
+      properties:
+        type:
+          type: string
+        timeout:
+          type: integer
+          format: int64
+        maxJobsToActivate:
+          type: integer
+        worker:
+          type: string
+        fetchVariable:
+          type: array
+          items:
+            type: string
+        tenantIds:
+          type: array
+          items:
+            type: string
+    FailJobRequest:
+      type: object
+      required:
+      - retries
+      properties:
+        retries:
+          type: integer
+        errorMessage:
+          type: string
+        retryBackOff:
+          type: integer
+          format: int64
+        variables:
+          type: object
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer

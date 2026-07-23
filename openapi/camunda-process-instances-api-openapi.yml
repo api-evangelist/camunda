@@ -1,0 +1,172 @@
+openapi: 3.1.0
+info:
+  title: Camunda 8 REST Cluster Process Instances API
+  description: The Camunda 8 REST API provides endpoints for managing process instances, jobs, decisions, deployments, messages, signals, and other resources in the Camunda 8 process orchestration platform.
+  version: 8.6.0
+  contact:
+    name: Camunda
+    url: https://camunda.com/
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0
+servers:
+- url: '{baseUrl}/v2'
+  description: Camunda 8 Self-Managed or SaaS
+  variables:
+    baseUrl:
+      default: http://localhost:8080
+security:
+- BearerAuth: []
+tags:
+- name: Process Instances
+paths:
+  /process-instances:
+    post:
+      operationId: createProcessInstance
+      summary: Create a process instance
+      description: Creates and starts a new process instance.
+      tags:
+      - Process Instances
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateProcessInstanceRequest'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProcessInstance'
+  /process-instances/search:
+    post:
+      operationId: searchProcessInstances
+      summary: Search process instances
+      description: Search for process instances based on provided criteria.
+      tags:
+      - Process Instances
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SearchRequest'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProcessInstanceSearchResponse'
+  /process-instances/{processInstanceKey}:
+    get:
+      operationId: getProcessInstance
+      summary: Get process instance
+      description: Returns a specific process instance by key.
+      tags:
+      - Process Instances
+      parameters:
+      - name: processInstanceKey
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProcessInstance'
+    delete:
+      operationId: cancelProcessInstance
+      summary: Cancel a process instance
+      description: Cancels a running process instance.
+      tags:
+      - Process Instances
+      parameters:
+      - name: processInstanceKey
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '204':
+          description: Process instance cancelled
+components:
+  schemas:
+    ProcessInstanceSearchResponse:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/ProcessInstance'
+        page:
+          type: object
+    SearchRequest:
+      type: object
+      properties:
+        filter:
+          type: object
+        sort:
+          type: array
+          items:
+            type: object
+            properties:
+              field:
+                type: string
+              order:
+                type: string
+                enum:
+                - ASC
+                - DESC
+        page:
+          type: object
+          properties:
+            from:
+              type: integer
+            limit:
+              type: integer
+            searchAfter:
+              type: array
+              items: {}
+            searchBefore:
+              type: array
+              items: {}
+    ProcessInstance:
+      type: object
+      properties:
+        processInstanceKey:
+          type: integer
+          format: int64
+        processDefinitionKey:
+          type: integer
+          format: int64
+        bpmnProcessId:
+          type: string
+        version:
+          type: integer
+        tenantId:
+          type: string
+    CreateProcessInstanceRequest:
+      type: object
+      properties:
+        processDefinitionKey:
+          type: integer
+          format: int64
+        bpmnProcessId:
+          type: string
+        version:
+          type: integer
+        variables:
+          type: object
+        tenantId:
+          type: string
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer

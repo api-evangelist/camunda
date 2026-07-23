@@ -1,0 +1,144 @@
+openapi: 3.1.0
+info:
+  title: Camunda 8 REST Cluster Process Definitions API
+  description: The Camunda 8 REST API provides endpoints for managing process instances, jobs, decisions, deployments, messages, signals, and other resources in the Camunda 8 process orchestration platform.
+  version: 8.6.0
+  contact:
+    name: Camunda
+    url: https://camunda.com/
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0
+servers:
+- url: '{baseUrl}/v2'
+  description: Camunda 8 Self-Managed or SaaS
+  variables:
+    baseUrl:
+      default: http://localhost:8080
+security:
+- BearerAuth: []
+tags:
+- name: Process Definitions
+paths:
+  /process-definitions/search:
+    post:
+      operationId: searchProcessDefinitions
+      summary: Search process definitions
+      description: Search for process definitions based on provided criteria.
+      tags:
+      - Process Definitions
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SearchRequest'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProcessDefinitionSearchResponse'
+  /process-definitions/{processDefinitionKey}:
+    get:
+      operationId: getProcessDefinition
+      summary: Get process definition
+      description: Returns a specific process definition by key.
+      tags:
+      - Process Definitions
+      parameters:
+      - name: processDefinitionKey
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProcessDefinition'
+  /process-definitions/{processDefinitionKey}/xml:
+    get:
+      operationId: getProcessDefinitionXml
+      summary: Get process definition XML
+      description: Returns the BPMN XML of a process definition.
+      tags:
+      - Process Definitions
+      parameters:
+      - name: processDefinitionKey
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/xml:
+              schema:
+                type: string
+components:
+  schemas:
+    ProcessDefinitionSearchResponse:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/ProcessDefinition'
+        page:
+          type: object
+    ProcessDefinition:
+      type: object
+      properties:
+        processDefinitionKey:
+          type: integer
+          format: int64
+        bpmnProcessId:
+          type: string
+        name:
+          type: string
+        version:
+          type: integer
+        resourceName:
+          type: string
+        tenantId:
+          type: string
+    SearchRequest:
+      type: object
+      properties:
+        filter:
+          type: object
+        sort:
+          type: array
+          items:
+            type: object
+            properties:
+              field:
+                type: string
+              order:
+                type: string
+                enum:
+                - ASC
+                - DESC
+        page:
+          type: object
+          properties:
+            from:
+              type: integer
+            limit:
+              type: integer
+            searchAfter:
+              type: array
+              items: {}
+            searchBefore:
+              type: array
+              items: {}
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer

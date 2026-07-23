@@ -1,0 +1,63 @@
+openapi: 3.1.0
+info:
+  title: Camunda 8 REST Cluster Messages API
+  description: The Camunda 8 REST API provides endpoints for managing process instances, jobs, decisions, deployments, messages, signals, and other resources in the Camunda 8 process orchestration platform.
+  version: 8.6.0
+  contact:
+    name: Camunda
+    url: https://camunda.com/
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0
+servers:
+- url: '{baseUrl}/v2'
+  description: Camunda 8 Self-Managed or SaaS
+  variables:
+    baseUrl:
+      default: http://localhost:8080
+security:
+- BearerAuth: []
+tags:
+- name: Messages
+paths:
+  /messages/publication:
+    post:
+      operationId: publishMessage
+      summary: Publish a message
+      description: Publishes a message to correlate with waiting subscriptions.
+      tags:
+      - Messages
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PublishMessageRequest'
+      responses:
+        '200':
+          description: Successful response
+components:
+  schemas:
+    PublishMessageRequest:
+      type: object
+      required:
+      - name
+      - correlationKey
+      properties:
+        name:
+          type: string
+        correlationKey:
+          type: string
+        timeToLive:
+          type: integer
+          format: int64
+        messageId:
+          type: string
+        variables:
+          type: object
+        tenantId:
+          type: string
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer

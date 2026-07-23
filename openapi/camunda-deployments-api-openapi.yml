@@ -1,0 +1,111 @@
+openapi: 3.1.0
+info:
+  title: Camunda 8 REST Cluster Deployments API
+  description: The Camunda 8 REST API provides endpoints for managing process instances, jobs, decisions, deployments, messages, signals, and other resources in the Camunda 8 process orchestration platform.
+  version: 8.6.0
+  contact:
+    name: Camunda
+    url: https://camunda.com/
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0
+servers:
+- url: '{baseUrl}/v2'
+  description: Camunda 8 Self-Managed or SaaS
+  variables:
+    baseUrl:
+      default: http://localhost:8080
+security:
+- BearerAuth: []
+tags:
+- name: Deployments
+paths:
+  /deployments:
+    post:
+      operationId: createDeployment
+      summary: Deploy resources
+      description: Deploys BPMN processes, DMN decisions, and forms.
+      tags:
+      - Deployments
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                resources:
+                  type: array
+                  items:
+                    type: string
+                    format: binary
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeploymentResponse'
+  /deployments/search:
+    post:
+      operationId: searchDeployments
+      summary: Search deployments
+      description: Search for deployments based on provided criteria.
+      tags:
+      - Deployments
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SearchRequest'
+      responses:
+        '200':
+          description: Successful response
+components:
+  schemas:
+    SearchRequest:
+      type: object
+      properties:
+        filter:
+          type: object
+        sort:
+          type: array
+          items:
+            type: object
+            properties:
+              field:
+                type: string
+              order:
+                type: string
+                enum:
+                - ASC
+                - DESC
+        page:
+          type: object
+          properties:
+            from:
+              type: integer
+            limit:
+              type: integer
+            searchAfter:
+              type: array
+              items: {}
+            searchBefore:
+              type: array
+              items: {}
+    DeploymentResponse:
+      type: object
+      properties:
+        deploymentKey:
+          type: integer
+          format: int64
+        deployments:
+          type: array
+          items:
+            type: object
+        tenantId:
+          type: string
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer

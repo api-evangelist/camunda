@@ -1,0 +1,68 @@
+openapi: 3.1.0
+info:
+  title: Camunda 8 REST Cluster API
+  description: The Camunda 8 REST API provides endpoints for managing process instances, jobs, decisions, deployments, messages, signals, and other resources in the Camunda 8 process orchestration platform.
+  version: 8.6.0
+  contact:
+    name: Camunda
+    url: https://camunda.com/
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0
+servers:
+- url: '{baseUrl}/v2'
+  description: Camunda 8 Self-Managed or SaaS
+  variables:
+    baseUrl:
+      default: http://localhost:8080
+security:
+- BearerAuth: []
+tags:
+- name: Cluster
+paths:
+  /topology:
+    get:
+      operationId: getTopology
+      summary: Get cluster topology
+      description: Returns the current topology of the Camunda cluster.
+      tags:
+      - Cluster
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TopologyResponse'
+components:
+  schemas:
+    TopologyResponse:
+      type: object
+      properties:
+        brokers:
+          type: array
+          items:
+            type: object
+            properties:
+              nodeId:
+                type: integer
+              host:
+                type: string
+              port:
+                type: integer
+              partitions:
+                type: array
+                items:
+                  type: object
+        clusterSize:
+          type: integer
+        partitionsCount:
+          type: integer
+        replicationFactor:
+          type: integer
+        gatewayVersion:
+          type: string
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
