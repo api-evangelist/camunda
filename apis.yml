@@ -7,7 +7,20 @@ tags:
   - Process Automation
   - Workflow
 type: Index
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+accessModel:
+  pricing: freemium
+  onboarding: self-serve
+  trial: false
+  try_now: true
+  public: false
+  label: Freemium · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/camunda.png
 access: 3rd-Party
 created: '2026-03-16'
 modified: '2026-05-19'
@@ -17,21 +30,116 @@ description: >-
   processes using BPMN (Business Process Model and Notation). Camunda provides a complete solution for workflow
   automation, decision automation, and process monitoring.
 apis:
-  - aid: camunda:camunda-8-api
-    name: Camunda 8 API
-    tags:
-      - BPMN
-      - Process Automation
-      - Workflow
-    humanURL: https://docs.camunda.io/docs/apis-tools/camunda-api-rest/camunda-api-rest-overview/
-    properties:
-      - url: https://docs.camunda.io/docs/apis-tools/camunda-api-rest/camunda-api-rest-overview/
-        type: Documentation
-      - url: https://raw.githubusercontent.com/api-evangelist/camunda/refs/heads/main/openapi/camunda-8-api.yml
-        type: OpenAPI
-    description: >-
-      The Camunda 8 REST API provides access to process instances, tasks, decisions, and other Camunda resources for
-      process automation workflows.
+- aid: camunda:camunda-cluster-api
+  name: Camunda Cluster API
+  description: The Cluster API from Camunda — 1 operation(s) for cluster.
+  humanURL: https://docs.camunda.io/docs/apis-tools/camunda-api-rest/camunda-api-rest-overview/
+  tags:
+  - Cluster
+  properties:
+  - type: OpenAPI
+    url: openapi/camunda-cluster-api-openapi.yml
+  - type: Documentation
+    url: https://docs.camunda.io/docs/apis-tools/camunda-api-rest/camunda-api-rest-overview/
+- aid: camunda:camunda-decisions-api
+  name: Camunda Decisions API
+  description: The Decisions API from Camunda — 2 operation(s) for decisions.
+  humanURL: https://docs.camunda.io/docs/apis-tools/camunda-api-rest/camunda-api-rest-overview/
+  tags:
+  - Decisions
+  properties:
+  - type: OpenAPI
+    url: openapi/camunda-decisions-api-openapi.yml
+  - type: Documentation
+    url: https://docs.camunda.io/docs/apis-tools/camunda-api-rest/camunda-api-rest-overview/
+- aid: camunda:camunda-deployments-api
+  name: Camunda Deployments API
+  description: The Deployments API from Camunda — 2 operation(s) for deployments.
+  humanURL: https://docs.camunda.io/docs/apis-tools/camunda-api-rest/camunda-api-rest-overview/
+  tags:
+  - Deployments
+  properties:
+  - type: OpenAPI
+    url: openapi/camunda-deployments-api-openapi.yml
+  - type: Documentation
+    url: https://docs.camunda.io/docs/apis-tools/camunda-api-rest/camunda-api-rest-overview/
+- aid: camunda:camunda-incidents-api
+  name: Camunda Incidents API
+  description: The Incidents API from Camunda — 2 operation(s) for incidents.
+  humanURL: https://docs.camunda.io/docs/apis-tools/camunda-api-rest/camunda-api-rest-overview/
+  tags:
+  - Incidents
+  properties:
+  - type: OpenAPI
+    url: openapi/camunda-incidents-api-openapi.yml
+  - type: Documentation
+    url: https://docs.camunda.io/docs/apis-tools/camunda-api-rest/camunda-api-rest-overview/
+- aid: camunda:camunda-jobs-api
+  name: Camunda Jobs API
+  description: The Jobs API from Camunda — 4 operation(s) for jobs.
+  humanURL: https://docs.camunda.io/docs/apis-tools/camunda-api-rest/camunda-api-rest-overview/
+  tags:
+  - Jobs
+  properties:
+  - type: OpenAPI
+    url: openapi/camunda-jobs-api-openapi.yml
+  - type: Documentation
+    url: https://docs.camunda.io/docs/apis-tools/camunda-api-rest/camunda-api-rest-overview/
+- aid: camunda:camunda-messages-api
+  name: Camunda Messages API
+  description: The Messages API from Camunda — 1 operation(s) for messages.
+  humanURL: https://docs.camunda.io/docs/apis-tools/camunda-api-rest/camunda-api-rest-overview/
+  tags:
+  - Messages
+  properties:
+  - type: OpenAPI
+    url: openapi/camunda-messages-api-openapi.yml
+  - type: Documentation
+    url: https://docs.camunda.io/docs/apis-tools/camunda-api-rest/camunda-api-rest-overview/
+- aid: camunda:camunda-process-definitions-api
+  name: Camunda Process Definitions API
+  description: The Process Definitions API from Camunda — 3 operation(s) for process definitions.
+  humanURL: https://docs.camunda.io/docs/apis-tools/camunda-api-rest/camunda-api-rest-overview/
+  tags:
+  - Process Definitions
+  properties:
+  - type: OpenAPI
+    url: openapi/camunda-process-definitions-api-openapi.yml
+  - type: Documentation
+    url: https://docs.camunda.io/docs/apis-tools/camunda-api-rest/camunda-api-rest-overview/
+- aid: camunda:camunda-process-instances-api
+  name: Camunda Process Instances API
+  description: The Process Instances API from Camunda — 3 operation(s) for process instances.
+  humanURL: https://docs.camunda.io/docs/apis-tools/camunda-api-rest/camunda-api-rest-overview/
+  tags:
+  - Process Instances
+  properties:
+  - type: OpenAPI
+    url: openapi/camunda-process-instances-api-openapi.yml
+  - type: Documentation
+    url: https://docs.camunda.io/docs/apis-tools/camunda-api-rest/camunda-api-rest-overview/
+- aid: camunda:camunda-signals-api
+  name: Camunda Signals API
+  description: The Signals API from Camunda — 1 operation(s) for signals.
+  humanURL: https://docs.camunda.io/docs/apis-tools/camunda-api-rest/camunda-api-rest-overview/
+  tags:
+  - Signals
+  properties:
+  - type: OpenAPI
+    url: openapi/camunda-signals-api-openapi.yml
+  - type: Documentation
+    url: https://docs.camunda.io/docs/apis-tools/camunda-api-rest/camunda-api-rest-overview/
+- aid: camunda:camunda-user-tasks-api
+  name: Camunda User Tasks API
+  description: The User Tasks API from Camunda — 3 operation(s) for user tasks.
+  humanURL: https://docs.camunda.io/docs/apis-tools/camunda-api-rest/camunda-api-rest-overview/
+  tags:
+  - User Tasks
+  properties:
+  - type: OpenAPI
+    url: openapi/camunda-user-tasks-api-openapi.yml
+  - type: Documentation
+    url: https://docs.camunda.io/docs/apis-tools/camunda-api-rest/camunda-api-rest-overview/
 common:
   - type: AgenticAccess
     url: agentic-access/camunda-agentic-access.yml
