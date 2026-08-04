@@ -1,0 +1,32 @@
+{
+  "provider": "camunda",
+  "sources": [
+    "camunda-cluster-api-openapi.yml",
+    "camunda-decisions-api-openapi.yml",
+    "camunda-deployments-api-openapi.yml",
+    "camunda-incidents-api-openapi.yml",
+    "camunda-jobs-api-openapi.yml",
+    "camunda-messages-api-openapi.yml",
+    "camunda-process-definitions-api-openapi.yml",
+    "camunda-process-instances-api-openapi.yml",
+    "camunda-signals-api-openapi.yml",
+    "camunda-user-tasks-api-openapi.yml"
+  ],
+  "outputs": [
+    "camunda-cluster-api-openapi.yml",
+    "camunda-decisions-api-openapi.yml",
+    "camunda-deployments-api-openapi.yml",
+    "camunda-incidents-api-openapi.yml",
+    "camunda-jobs-api-openapi.yml",
+    "camunda-messages-api-openapi.yml",
+    "camunda-process-definitions-api-openapi.yml",
+    "camunda-process-instances-api-openapi.yml",
+    "camunda-signals-api-openapi.yml",
+    "camunda-user-tasks-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
