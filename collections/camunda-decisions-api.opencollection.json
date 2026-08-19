@@ -1,0 +1,61 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Camunda 8 REST Cluster Decisions API",
+    "version": "8.6.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Decisions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Search decision definitions",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{baseUrl}/v2/decision-definitions/search",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Search for DMN decision definitions."
+        },
+        {
+          "info": {
+            "name": "Evaluate a decision",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{baseUrl}/v2/decision-definitions/:decisionKey/evaluation",
+            "params": [
+              {
+                "name": "decisionKey",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Evaluates a DMN decision with the given variables."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

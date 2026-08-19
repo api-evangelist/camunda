@@ -1,0 +1,105 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Camunda 8 REST Cluster Jobs API",
+    "version": "8.6.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Jobs",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Activate jobs",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{baseUrl}/v2/jobs/activation",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Activates jobs of a specific type for processing."
+        },
+        {
+          "info": {
+            "name": "Complete a job",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{baseUrl}/v2/jobs/:jobKey/completion",
+            "params": [
+              {
+                "name": "jobKey",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Completes a job with the given variables."
+        },
+        {
+          "info": {
+            "name": "Fail a job",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{baseUrl}/v2/jobs/:jobKey/failure",
+            "params": [
+              {
+                "name": "jobKey",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Reports a job failure for retry or incident creation."
+        },
+        {
+          "info": {
+            "name": "Throw error for a job",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{baseUrl}/v2/jobs/:jobKey/error",
+            "params": [
+              {
+                "name": "jobKey",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Throws a BPMN error for a job."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

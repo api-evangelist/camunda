@@ -1,0 +1,57 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Camunda 8 REST Cluster Incidents API",
+    "version": "8.6.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Incidents",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Search incidents",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{baseUrl}/v2/incidents/search",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Search for incidents based on provided criteria."
+        },
+        {
+          "info": {
+            "name": "Resolve an incident",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{baseUrl}/v2/incidents/:incidentKey/resolution",
+            "params": [
+              {
+                "name": "incidentKey",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Resolves an incident to retry the failed operation."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

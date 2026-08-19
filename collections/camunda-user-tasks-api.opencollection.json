@@ -1,0 +1,83 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Camunda 8 REST Cluster User Tasks API",
+    "version": "8.6.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "User Tasks",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Search user tasks",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{baseUrl}/v2/user-tasks/search",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Search for user tasks based on provided criteria."
+        },
+        {
+          "info": {
+            "name": "Assign a user task",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{baseUrl}/v2/user-tasks/:userTaskKey/assignment",
+            "params": [
+              {
+                "name": "userTaskKey",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Assigns a user task to a specific assignee."
+        },
+        {
+          "info": {
+            "name": "Complete a user task",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{baseUrl}/v2/user-tasks/:userTaskKey/completion",
+            "params": [
+              {
+                "name": "userTaskKey",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Completes a user task with optional variables."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

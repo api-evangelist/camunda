@@ -1,0 +1,75 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Camunda 8 REST Cluster Process Definitions API",
+    "version": "8.6.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Process Definitions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Search process definitions",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{baseUrl}/v2/process-definitions/search",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Search for process definitions based on provided criteria."
+        },
+        {
+          "info": {
+            "name": "Get process definition",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{baseUrl}/v2/process-definitions/:processDefinitionKey",
+            "params": [
+              {
+                "name": "processDefinitionKey",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns a specific process definition by key."
+        },
+        {
+          "info": {
+            "name": "Get process definition XML",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{baseUrl}/v2/process-definitions/:processDefinitionKey/xml",
+            "params": [
+              {
+                "name": "processDefinitionKey",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns the BPMN XML of a process definition."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

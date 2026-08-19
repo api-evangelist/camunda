@@ -1,0 +1,90 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Camunda 8 REST Cluster Process Instances API",
+    "version": "8.6.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Process Instances",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create a process instance",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{baseUrl}/v2/process-instances",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates and starts a new process instance."
+        },
+        {
+          "info": {
+            "name": "Search process instances",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{baseUrl}/v2/process-instances/search",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Search for process instances based on provided criteria."
+        },
+        {
+          "info": {
+            "name": "Get process instance",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{baseUrl}/v2/process-instances/:processInstanceKey",
+            "params": [
+              {
+                "name": "processInstanceKey",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns a specific process instance by key."
+        },
+        {
+          "info": {
+            "name": "Cancel a process instance",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{baseUrl}/v2/process-instances/:processInstanceKey",
+            "params": [
+              {
+                "name": "processInstanceKey",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Cancels a running process instance."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
