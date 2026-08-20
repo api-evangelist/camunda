@@ -5,6 +5,11 @@ tags:
   - BPMN
   - Business Process Management
   - Process Automation
+  - Workflows
+tags_raw:
+  - BPMN
+  - Business Process Management
+  - Process Automation
   - Workflow
 type: Index
 accessModel:
@@ -57,6 +62,8 @@ apis:
   description: The Deployments API from Camunda — 2 operation(s) for deployments.
   humanURL: https://docs.camunda.io/docs/apis-tools/camunda-api-rest/camunda-api-rest-overview/
   tags:
+  - Deployment
+  tags_raw:
   - Deployments
   properties:
   - type: OpenAPI
@@ -79,6 +86,8 @@ apis:
   description: The Jobs API from Camunda — 4 operation(s) for jobs.
   humanURL: https://docs.camunda.io/docs/apis-tools/camunda-api-rest/camunda-api-rest-overview/
   tags:
+  - Job
+  tags_raw:
   - Jobs
   properties:
   - type: OpenAPI
@@ -90,6 +99,8 @@ apis:
   description: The Messages API from Camunda — 1 operation(s) for messages.
   humanURL: https://docs.camunda.io/docs/apis-tools/camunda-api-rest/camunda-api-rest-overview/
   tags:
+  - Message
+  tags_raw:
   - Messages
   properties:
   - type: OpenAPI
