@@ -1,6 +1,9 @@
 aid: camunda
 url: https://raw.githubusercontent.com/api-evangelist/camunda/refs/heads/main/apis.yml
 name: Camunda
+x-docs-platform: docusaurus
+x-docs-platform-confidence: medium
+x-docs-platform-checked: 2026-09-21
 tags:
   - BPMN
   - Business Process Management
