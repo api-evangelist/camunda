@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Camunda 8 REST Cluster Deployments API
+  title: Camunda 8 REST Deployments API
   description: The Camunda 8 REST API provides endpoints for managing process instances, jobs, decisions, deployments, messages, signals, and other resources in the Camunda 8 process orchestration platform.
   version: 8.6.0
   contact:
@@ -63,6 +63,18 @@ paths:
           description: Successful response
 components:
   schemas:
+    DeploymentResponse:
+      type: object
+      properties:
+        deploymentKey:
+          type: integer
+          format: int64
+        deployments:
+          type: array
+          items:
+            type: object
+        tenantId:
+          type: string
     SearchRequest:
       type: object
       properties:
@@ -93,18 +105,6 @@ components:
             searchBefore:
               type: array
               items: {}
-    DeploymentResponse:
-      type: object
-      properties:
-        deploymentKey:
-          type: integer
-          format: int64
-        deployments:
-          type: array
-          items:
-            type: object
-        tenantId:
-          type: string
   securitySchemes:
     BearerAuth:
       type: http

@@ -1,16 +1,7 @@
 {
   "provider": "camunda",
   "sources": [
-    "camunda-cluster-api-openapi.yml",
-    "camunda-decisions-api-openapi.yml",
-    "camunda-deployments-api-openapi.yml",
-    "camunda-incidents-api-openapi.yml",
-    "camunda-jobs-api-openapi.yml",
-    "camunda-messages-api-openapi.yml",
-    "camunda-process-definitions-api-openapi.yml",
-    "camunda-process-instances-api-openapi.yml",
-    "camunda-signals-api-openapi.yml",
-    "camunda-user-tasks-api-openapi.yml"
+    "_original/camunda-8-api.yml"
   ],
   "outputs": [
     "camunda-cluster-api-openapi.yml",
@@ -27,6 +18,31 @@
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "camunda-8-api.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "camunda-8-api.yml: declared missing tag: Cluster",
+    "camunda-8-api.yml: declared missing tag: Decisions",
+    "camunda-8-api.yml: declared missing tag: Deployments",
+    "camunda-8-api.yml: declared missing tag: Incidents",
+    "camunda-8-api.yml: declared missing tag: Jobs",
+    "camunda-8-api.yml: declared missing tag: Messages",
+    "camunda-8-api.yml: declared missing tag: Process Definitions",
+    "camunda-8-api.yml: declared missing tag: Process Instances",
+    "camunda-8-api.yml: declared missing tag: Signals",
+    "camunda-8-api.yml: declared missing tag: User Tasks",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": [
+    "camunda-cluster-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "camunda-decisions-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "camunda-deployments-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "camunda-incidents-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "camunda-jobs-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "camunda-messages-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "camunda-process-definitions-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "camunda-process-instances-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "camunda-signals-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "camunda-user-tasks-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }

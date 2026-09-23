@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Camunda 8 REST Cluster Incidents API
+  title: Camunda 8 REST Incidents API
   description: The Camunda 8 REST API provides endpoints for managing process instances, jobs, decisions, deployments, messages, signals, and other resources in the Camunda 8 process orchestration platform.
   version: 8.6.0
   contact:
