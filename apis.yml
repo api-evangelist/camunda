@@ -9,11 +9,13 @@ tags:
   - Business Process Management
   - Process Automation
   - Workflows
+  - Workflow Automation
 tags_raw:
   - BPMN
   - Business Process Management
   - Process Automation
   - Workflow
+  - Workflow-Automation
 type: Index
 deliveryModel:
   model: saas

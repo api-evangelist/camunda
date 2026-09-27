@@ -98,15 +98,6 @@ paths:
           description: Process instance cancelled
 components:
   schemas:
-    ProcessInstanceSearchResponse:
-      type: object
-      properties:
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/ProcessInstance'
-        page:
-          type: object
     ProcessInstance:
       type: object
       properties:
@@ -136,6 +127,15 @@ components:
           type: object
         tenantId:
           type: string
+    ProcessInstanceSearchResponse:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/ProcessInstance'
+        page:
+          type: object
     SearchRequest:
       type: object
       properties:
