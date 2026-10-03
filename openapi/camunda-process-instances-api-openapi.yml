@@ -113,29 +113,6 @@ components:
           type: integer
         tenantId:
           type: string
-    CreateProcessInstanceRequest:
-      type: object
-      properties:
-        processDefinitionKey:
-          type: integer
-          format: int64
-        bpmnProcessId:
-          type: string
-        version:
-          type: integer
-        variables:
-          type: object
-        tenantId:
-          type: string
-    ProcessInstanceSearchResponse:
-      type: object
-      properties:
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/ProcessInstance'
-        page:
-          type: object
     SearchRequest:
       type: object
       properties:
@@ -166,6 +143,29 @@ components:
             searchBefore:
               type: array
               items: {}
+    CreateProcessInstanceRequest:
+      type: object
+      properties:
+        processDefinitionKey:
+          type: integer
+          format: int64
+        bpmnProcessId:
+          type: string
+        version:
+          type: integer
+        variables:
+          type: object
+        tenantId:
+          type: string
+    ProcessInstanceSearchResponse:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/ProcessInstance'
+        page:
+          type: object
   securitySchemes:
     BearerAuth:
       type: http
