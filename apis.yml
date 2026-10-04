@@ -170,6 +170,9 @@ apis:
   - type: Documentation
     url: https://docs.camunda.io/docs/apis-tools/camunda-api-rest/camunda-api-rest-overview/
 common:
+  - type: CapabilityMap
+    url: capabilities/camunda-capability-edges.yml
+    name: Camunda Business Capability Map
   - type: AgenticAccess
     url: agentic-access/camunda-agentic-access.yml
   - type: TrustCenter
