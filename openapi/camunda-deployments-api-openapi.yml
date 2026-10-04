@@ -63,6 +63,18 @@ paths:
           description: Successful response
 components:
   schemas:
+    DeploymentResponse:
+      type: object
+      properties:
+        deploymentKey:
+          type: integer
+          format: int64
+        deployments:
+          type: array
+          items:
+            type: object
+        tenantId:
+          type: string
     SearchRequest:
       type: object
       properties:
@@ -93,18 +105,6 @@ components:
             searchBefore:
               type: array
               items: {}
-    DeploymentResponse:
-      type: object
-      properties:
-        deploymentKey:
-          type: integer
-          format: int64
-        deployments:
-          type: array
-          items:
-            type: object
-        tenantId:
-          type: string
   securitySchemes:
     BearerAuth:
       type: http

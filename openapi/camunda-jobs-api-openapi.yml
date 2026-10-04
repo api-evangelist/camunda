@@ -157,20 +157,6 @@ components:
           type: object
         tenantId:
           type: string
-    FailJobRequest:
-      type: object
-      required:
-      - retries
-      properties:
-        retries:
-          type: integer
-        errorMessage:
-          type: string
-        retryBackOff:
-          type: integer
-          format: int64
-        variables:
-          type: object
     ActivateJobsRequest:
       type: object
       required:
@@ -195,6 +181,20 @@ components:
           type: array
           items:
             type: string
+    FailJobRequest:
+      type: object
+      required:
+      - retries
+      properties:
+        retries:
+          type: integer
+        errorMessage:
+          type: string
+        retryBackOff:
+          type: integer
+          format: int64
+        variables:
+          type: object
   securitySchemes:
     BearerAuth:
       type: http

@@ -83,22 +83,6 @@ paths:
                 type: string
 components:
   schemas:
-    ProcessDefinition:
-      type: object
-      properties:
-        processDefinitionKey:
-          type: integer
-          format: int64
-        bpmnProcessId:
-          type: string
-        name:
-          type: string
-        version:
-          type: integer
-        resourceName:
-          type: string
-        tenantId:
-          type: string
     ProcessDefinitionSearchResponse:
       type: object
       properties:
@@ -138,6 +122,22 @@ components:
             searchBefore:
               type: array
               items: {}
+    ProcessDefinition:
+      type: object
+      properties:
+        processDefinitionKey:
+          type: integer
+          format: int64
+        bpmnProcessId:
+          type: string
+        name:
+          type: string
+        version:
+          type: integer
+        resourceName:
+          type: string
+        tenantId:
+          type: string
   securitySchemes:
     BearerAuth:
       type: http
