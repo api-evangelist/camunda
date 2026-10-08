@@ -170,6 +170,12 @@ apis:
   - type: Documentation
     url: https://docs.camunda.io/docs/apis-tools/camunda-api-rest/camunda-api-rest-overview/
 common:
+  - type: Plans
+    url: plans/camunda-plans-pricing.yml
+  - type: RateLimits
+    url: rate-limits/camunda-rate-limits.yml
+  - type: FinOps
+    url: finops/camunda-finops.yml
   - type: CapabilityMap
     url: capabilities/camunda-capability-edges.yml
     name: Camunda Business Capability Map
