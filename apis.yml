@@ -213,6 +213,8 @@ common:
     url: https://camunda.com/partners/
   - type: LlmsText
     url: https://docs.camunda.io/llms.txt
+  - type: SpectralRules
+    url: https://github.com/camunda/camunda/blob/bb9c4b0c35d450622e77f151a814bf3c1c6a27e8/zeebe/gateway-protocol/.spectral.yaml
 integrations:
   - name: Aaseya
   - name: apendo

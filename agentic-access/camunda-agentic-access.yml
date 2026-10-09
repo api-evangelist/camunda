@@ -1,18 +1,22 @@
-generated: '2026-07-15'
+generated: '2026-09-23'
 method: generated
-source: openapi/camunda-8-api.yml
+source: openapi/camunda-cluster-api-openapi.yml, openapi/camunda-decisions-api-openapi.yml,
+  openapi/camunda-deployments-api-openapi.yml, openapi/camunda-incidents-api-openapi.yml, openapi/camunda-jobs-api-openapi.yml,
+  openapi/camunda-messages-api-openapi.yml, openapi/camunda-process-definitions-api-openapi.yml,
+  openapi/camunda-process-instances-api-openapi.yml, openapi/camunda-signals-api-openapi.yml,
+  openapi/camunda-user-tasks-api-openapi.yml
 description: Recommended x-agentic-access execution contracts, classified heuristically from
   the OpenAPI. A governance starting point for exposing this API to AI agents — review and bind
   audience per deployment. See research/curity/agentic-governance/.
 summary:
   operations: 23
   by_action_class:
-    connected: 4
-    acting: 19
+    connected: 10
+    acting: 13
   by_consequence:
-    read: 4
-    write: 17
-    physical: 2
+    read: 10
+    write: 12
+    physical: 1
   human_in_the_loop_required: 0
 operations:
 - path: /topology
@@ -25,9 +29,19 @@ operations:
     token:
       max-ttl: 3600
     audit: none
-- path: /process-definitions/search
+- path: /decision-definitions/search
   method: post
-  operationId: searchProcessDefinitions
+  operationId: searchDecisionDefinitions
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /decision-definitions/{decisionKey}/evaluation
+  method: post
+  operationId: evaluateDecision
   x-agentic-access:
     action-class: acting
     consequence: write
@@ -41,61 +55,27 @@ operations:
       - abnormal
       - high-value
     audit: required
-- path: /process-definitions/{processDefinitionKey}
-  method: get
-  operationId: getProcessDefinition
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /process-definitions/{processDefinitionKey}/xml
-  method: get
-  operationId: getProcessDefinitionXml
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /process-instances
+- path: /deployments
   method: post
-  operationId: createProcessInstance
+  operationId: createDeployment
   x-agentic-access:
     action-class: acting
-    consequence: write
+    consequence: physical
     subject: required
     audience: null
     token:
-      max-ttl: 900
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
     escalation:
       human-in-the-loop: conditional
       triggers:
       - abnormal
       - high-value
     audit: required
-- path: /process-instances/search
+- path: /deployments/search
   method: post
-  operationId: searchProcessInstances
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /process-instances/{processInstanceKey}
-  method: get
-  operationId: getProcessInstance
+  operationId: searchDeployments
   x-agentic-access:
     action-class: connected
     consequence: read
@@ -103,9 +83,19 @@ operations:
     token:
       max-ttl: 3600
     audit: none
-- path: /process-instances/{processInstanceKey}
-  method: delete
-  operationId: cancelProcessInstance
+- path: /incidents/search
+  method: post
+  operationId: searchIncidents
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /incidents/{incidentKey}/resolution
+  method: post
+  operationId: resolveIncident
   x-agentic-access:
     action-class: acting
     consequence: write
@@ -183,125 +173,91 @@ operations:
       - abnormal
       - high-value
     audit: required
-- path: /deployments
-  method: post
-  operationId: createDeployment
-  x-agentic-access:
-    action-class: acting
-    consequence: physical
-    subject: required
-    audience: null
-    token:
-      max-ttl: 300
-      exchange: true
-      purpose-required: true
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /deployments/search
-  method: post
-  operationId: searchDeployments
-  x-agentic-access:
-    action-class: acting
-    consequence: physical
-    subject: required
-    audience: null
-    token:
-      max-ttl: 300
-      exchange: true
-      purpose-required: true
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /decision-definitions/search
-  method: post
-  operationId: searchDecisionDefinitions
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /decision-definitions/{decisionKey}/evaluation
-  method: post
-  operationId: evaluateDecision
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /user-tasks/search
-  method: post
-  operationId: searchUserTasks
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /user-tasks/{userTaskKey}/assignment
-  method: post
-  operationId: assignUserTask
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /user-tasks/{userTaskKey}/completion
-  method: post
-  operationId: completeUserTask
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
 - path: /messages/publication
   method: post
   operationId: publishMessage
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /process-definitions/search
+  method: post
+  operationId: searchProcessDefinitions
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /process-definitions/{processDefinitionKey}
+  method: get
+  operationId: getProcessDefinition
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /process-definitions/{processDefinitionKey}/xml
+  method: get
+  operationId: getProcessDefinitionXml
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /process-instances
+  method: post
+  operationId: createProcessInstance
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /process-instances/search
+  method: post
+  operationId: searchProcessInstances
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /process-instances/{processInstanceKey}
+  method: get
+  operationId: getProcessInstance
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /process-instances/{processInstanceKey}
+  method: delete
+  operationId: cancelProcessInstance
   x-agentic-access:
     action-class: acting
     consequence: write
@@ -331,9 +287,19 @@ operations:
       - abnormal
       - high-value
     audit: required
-- path: /incidents/search
+- path: /user-tasks/search
   method: post
-  operationId: searchIncidents
+  operationId: searchUserTasks
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /user-tasks/{userTaskKey}/assignment
+  method: post
+  operationId: assignUserTask
   x-agentic-access:
     action-class: acting
     consequence: write
@@ -347,9 +313,9 @@ operations:
       - abnormal
       - high-value
     audit: required
-- path: /incidents/{incidentKey}/resolution
+- path: /user-tasks/{userTaskKey}/completion
   method: post
-  operationId: resolveIncident
+  operationId: completeUserTask
   x-agentic-access:
     action-class: acting
     consequence: write
