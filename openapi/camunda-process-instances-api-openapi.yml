@@ -98,30 +98,6 @@ paths:
           description: Process instance cancelled
 components:
   schemas:
-    ProcessInstanceSearchResponse:
-      type: object
-      properties:
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/ProcessInstance'
-        page:
-          type: object
-    ProcessInstance:
-      type: object
-      properties:
-        processInstanceKey:
-          type: integer
-          format: int64
-        processDefinitionKey:
-          type: integer
-          format: int64
-        bpmnProcessId:
-          type: string
-        version:
-          type: integer
-        tenantId:
-          type: string
     CreateProcessInstanceRequest:
       type: object
       properties:
@@ -166,6 +142,30 @@ components:
             searchBefore:
               type: array
               items: {}
+    ProcessInstance:
+      type: object
+      properties:
+        processInstanceKey:
+          type: integer
+          format: int64
+        processDefinitionKey:
+          type: integer
+          format: int64
+        bpmnProcessId:
+          type: string
+        version:
+          type: integer
+        tenantId:
+          type: string
+    ProcessInstanceSearchResponse:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/ProcessInstance'
+        page:
+          type: object
   securitySchemes:
     BearerAuth:
       type: http

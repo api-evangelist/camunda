@@ -123,6 +123,20 @@ paths:
           description: Error thrown
 components:
   schemas:
+    FailJobRequest:
+      type: object
+      required:
+      - retries
+      properties:
+        retries:
+          type: integer
+        errorMessage:
+          type: string
+        retryBackOff:
+          type: integer
+          format: int64
+        variables:
+          type: object
     Job:
       type: object
       properties:
@@ -181,20 +195,6 @@ components:
           type: array
           items:
             type: string
-    FailJobRequest:
-      type: object
-      required:
-      - retries
-      properties:
-        retries:
-          type: integer
-        errorMessage:
-          type: string
-        retryBackOff:
-          type: integer
-          format: int64
-        variables:
-          type: object
   securitySchemes:
     BearerAuth:
       type: http

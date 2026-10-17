@@ -83,15 +83,6 @@ paths:
                 type: string
 components:
   schemas:
-    ProcessDefinitionSearchResponse:
-      type: object
-      properties:
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/ProcessDefinition'
-        page:
-          type: object
     SearchRequest:
       type: object
       properties:
@@ -138,6 +129,15 @@ components:
           type: string
         tenantId:
           type: string
+    ProcessDefinitionSearchResponse:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/ProcessDefinition'
+        page:
+          type: object
   securitySchemes:
     BearerAuth:
       type: http
