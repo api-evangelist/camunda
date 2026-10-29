@@ -1,4 +1,4 @@
-# Camunda (camunda)
+# Camunda
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -66,63 +66,147 @@
 
 Camunda is a process orchestration platform that enables organizations to design, automate, and improve business processes using BPMN (Business Process Model and Notation). Camunda provides a complete solution for workflow automation, decision automation, and process monitoring.
 
-**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/camunda/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/camunda/refs/heads/main/apis.yml)
+**Areas:** BPMN · Business Process Management · Process Automation · Workflows · Workflow Automation
 
-## Scope
+## Camunda on APIs.io
 
-- **Type:** Index
-- **Position:** Consumer
-- **Access:** 3rd-Party
+Everything profiled for Camunda is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/camunda/](https://apis.io/providers/camunda/)** — or go straight to one of the APIs or properties below.
 
-## Tags
+### APIs (10)
 
-- BPMN
-- Business Process Management
-- Process Automation
-- Workflow
+- [Camunda Cluster API](https://apis.io/apis/camunda/camunda-cluster-api/) — The Cluster API from Camunda — 1 operation(s) for cluster.
+- [Camunda Decisions API](https://apis.io/apis/camunda/camunda-decisions-api/) — The Decisions API from Camunda — 2 operation(s) for decisions.
+- [Camunda Deployments API](https://apis.io/apis/camunda/camunda-deployments-api/) — The Deployments API from Camunda — 2 operation(s) for deployments.
+- [Camunda Incidents API](https://apis.io/apis/camunda/camunda-incidents-api/) — The Incidents API from Camunda — 2 operation(s) for incidents.
+- [Camunda Jobs API](https://apis.io/apis/camunda/camunda-jobs-api/) — The Jobs API from Camunda — 4 operation(s) for jobs.
+- [Camunda Messages API](https://apis.io/apis/camunda/camunda-messages-api/) — The Messages API from Camunda — 1 operation(s) for messages.
+- [Camunda Process Definitions API](https://apis.io/apis/camunda/camunda-process-definitions-api/) — The Process Definitions API from Camunda — 3 operation(s) for process definitions.
+- [Camunda Process Instances API](https://apis.io/apis/camunda/camunda-process-instances-api/) — The Process Instances API from Camunda — 3 operation(s) for process instances.
+- [Camunda Signals API](https://apis.io/apis/camunda/camunda-signals-api/) — The Signals API from Camunda — 1 operation(s) for signals.
+- [Camunda User Tasks API](https://apis.io/apis/camunda/camunda-user-tasks-api/) — The User Tasks API from Camunda — 3 operation(s) for user tasks.
 
-## Timestamps
+### Published properties
 
-- **Created:** 2026-03-16
-- **Modified:** 2026-05-19
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-## APIs
+#### Agentic access (1)
 
-### Camunda 8 API
+Which operations an agent can call, which act, and which need a human in the loop.
 
-The Camunda 8 REST API provides access to process instances, tasks, decisions, and other Camunda resources for process automation workflows.
+- [Camunda Agentic Access](https://apis.io/agentic-access/camunda/camunda-agentic-access/)
 
-- **Human URL:** [https://docs.camunda.io/docs/apis-tools/camunda-api-rest/camunda-api-rest-overview/](https://docs.camunda.io/docs/apis-tools/camunda-api-rest/camunda-api-rest-overview/)
+#### Collections (11)
 
-#### Tags
+Postman and Open Collection request collections.
 
-- BPMN
-- Process Automation
-- Workflow
+- [Camunda 8 REST API](https://apis.io/collections/camunda/open-camunda-8-api/)
+- [Camunda 8 REST Cluster API](https://apis.io/collections/camunda/open-camunda-cluster-api/)
+- [Camunda 8 REST Cluster Decisions API](https://apis.io/collections/camunda/open-camunda-decisions-api/)
+- [Camunda 8 REST Cluster Deployments API](https://apis.io/collections/camunda/open-camunda-deployments-api/)
+- [Camunda 8 REST Cluster Incidents API](https://apis.io/collections/camunda/open-camunda-incidents-api/)
+- [Camunda 8 REST Cluster Jobs API](https://apis.io/collections/camunda/open-camunda-jobs-api/)
+- [Camunda 8 REST Cluster Messages API](https://apis.io/collections/camunda/open-camunda-messages-api/)
+- [Camunda 8 REST Cluster Process Definitions API](https://apis.io/collections/camunda/open-camunda-process-definitions-api/)
+- [Camunda 8 REST Cluster Process Instances API](https://apis.io/collections/camunda/open-camunda-process-instances-api/)
+- [Camunda 8 REST Cluster Signals API](https://apis.io/collections/camunda/open-camunda-signals-api/)
+- [Camunda 8 REST Cluster User Tasks API](https://apis.io/collections/camunda/open-camunda-user-tasks-api/)
 
-#### Properties
+#### Governance rules (1)
 
-- [Documentation](https://docs.camunda.io/docs/apis-tools/camunda-api-rest/camunda-api-rest-overview/)
-- [OpenAPI](https://raw.githubusercontent.com/api-evangelist/camunda/refs/heads/main/openapi/camunda-8-api.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/camunda-8-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/camunda-8-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+Spectral rulesets for the provider's contracts.
 
-## Common Properties
+- [Camunda — camunda rules](https://apis.io/rules/camunda/camunda-camunda-spectral-rules/)
 
-- [GitHub Organization](https://github.com/camunda)
-- [LinkedIn](https://www.linkedin.com/company/camunda)
+#### Security (4)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Camunda Authentication](https://apis.io/security/camunda/camunda-authentication/)
+- [Camunda Domain Security](https://apis.io/security/camunda/camunda-domain-security/)
+- [Camunda Trust Center](https://apis.io/security/camunda/camunda-trust-center/)
+- [Camunda Vulnerability Disclosure](https://apis.io/security/camunda/camunda-vulnerability-disclosure/)
+
+#### Plans and pricing (1)
+
+Published plans, tiers and prices.
+
+- [Camunda Plans Pricing](https://apis.io/plans/camunda/camunda-plans-pricing/)
+
+#### Rate limits (1)
+
+Published request limits.
+
+- [Camunda Rate Limits](https://apis.io/rate-limits/camunda/camunda-rate-limits/)
+
+#### FinOps (1)
+
+What the API costs to run, by operation.
+
+- [Camunda Finops](https://apis.io/finops/camunda/camunda-finops/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
 - [Website](https://camunda.com/)
-- [Portal](https://docs.camunda.io/)
 - [Documentation](https://docs.camunda.io/docs/apis-tools/)
-- [Getting Started](https://docs.camunda.io/docs/guides/)
+- [Getting started](https://docs.camunda.io/docs/guides/)
 - [Blog](https://camunda.com/blog/)
-- [Community](https://forum.camunda.io/)
-- [Privacy Policy](https://camunda.com/legal/privacy/)
-- [Terms of Service](https://camunda.com/legal/terms/)
-- [Integrations](https://camunda.com/partners/)
-- [L L Ms Txt](https://docs.camunda.io/llms.txt)
+- [Terms of service](https://camunda.com/legal/terms/)
+- [Privacy policy](https://camunda.com/legal/privacy/)
+- [GitHub](https://github.com/camunda)
 
-## Maintainers
+## API Evangelist rating
 
-**FN:** Kin Lane
-**Email:** kin@apievangelist.com
+**Kin Score 44.6** — developing · rubric 0.25.0 · scored 2026-10-23
+
+| Facet | Score |
+|---|---|
+| Discoverability | 64.3 |
+| Contract quality | 45.9 |
+| Contract governance | 45.5 |
+| Operational transparency | 21.1 |
+| Developer ergonomics | 47.6 |
+| Access clarity | 36.8 |
+
+**Agent readiness 21.3** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | documented (partial credit) |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | — |
+| OpenAPI Examples | — |
+| Rate Limit Signal | derived (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+| Pagination Ratio | na |
+| Operation Distinctiveness | distinct |
+
+**Regulatory alignment 30.4** — Horizontal (data, software, accessibility, platform)
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/camunda/](https://apis.io/providers/camunda/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Camunda: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/camunda/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
